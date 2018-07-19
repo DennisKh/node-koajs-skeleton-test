@@ -25,7 +25,7 @@ module.exports = {
         if (typeof data === 'object') {
             data = JSON.stringify(data)
         }
-        try {
+        try {                  //тут має бути ctx.request.body, але в мене проблеми з нодою, тому так
             ctx.body = await goMan.setNewItem(data);
             ctx.status = 201;
             await next();
