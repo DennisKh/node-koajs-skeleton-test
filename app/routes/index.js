@@ -11,7 +11,7 @@ module.exports = function routes(app, passport) {
         co   = require('co'),
         Router = require('koa-router'),
         authed = require('../helpers/authedMiddleware'),
-        KoaBody = require('koa-body'),
+        //KoaBody = require('koa-body'),
 
 
     // Controllers
@@ -28,7 +28,7 @@ module.exports = function routes(app, passport) {
         .get('/users',     indexController.list)
         .get('/users/:id', indexController.getId)
         .get('/goods/:id', goodsController.get)// 200 - ок, 404 - нет такого товара
-        .post('/goods',    KoaBody(), goodsController.post)//201 - добавить товар, 400 - не удалось
+        .post('/goods',    goodsController.post)//201 - добавить товар, 400 - не удалось
         .del('/goods/:id', goodsController.del)//204 - удалось удалить, 400 - не удалось
         .get('/login',     loginController.login)
         .post('/login',

@@ -17,15 +17,11 @@ module.exports = {
     },
 
     post: async (ctx, next) => {
-        var data = [
-            {id:0, name: "test0" },
-            {id:1, name: "test1" },
-            {id:2, name: "test2" }
-        ];
+        var data = ctx.request.body;
         if (typeof data === 'object') {
             data = JSON.stringify(data)
         }
-        try {                  //тут має бути ctx.request.body, але в мене проблеми з нодою, тому так
+        try {                  
             ctx.body = await goMan.setNewItem(data);
             ctx.status = 201;
             await next();
@@ -37,14 +33,12 @@ module.exports = {
         }
     },
 
-    /** Get list of all users DB */
     del: async (ctx, next) => {
         try {
             ctx.body = await goMan.removeItem(ctx.params.id);
             ctx.status = 200;
             await next();
         } catch (err) {
-            // will only respond with JSON
             ctx.status = err.statusCode || err.status || 404;
             ctx.body = {
                 message: err.message

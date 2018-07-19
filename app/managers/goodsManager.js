@@ -1,4 +1,5 @@
 const Memcached = require('memcached'),
+           co   = require('co'),
       memcached = new Memcached('localhost:11211');
 
 module.exports = {
@@ -19,10 +20,10 @@ module.exports = {
 
     setNewItem: function setNewItemToMemcache(data) {
       return new Promise((resolve, reject) => {
-
+            console.log(data);
         try {
           let idx = Date.now();
-          memcached.set(idx, data, 600, function (err) {
+          memcached.set(idx, data, 200, function (err) {
             if (err) {
               console.log('Error 400' + "\n" +'Not Found');
             }
